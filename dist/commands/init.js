@@ -40,9 +40,9 @@ async function initCommand(projectName, intent) {
     (0, fs_1.mkdirSync)((0, path_1.join)(projectPath, 'programs', name, 'src'), { recursive: true });
     // Generate program ID (simplified for demo)
     const programId = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS";
-    // Create Anchor.toml with compatible version
+    // Create Anchor.toml with matching CLI version
     const anchorToml = `[toolchain]
-anchor_version = "0.30.1"
+anchor_version = "0.32.1"
 
 [features]
 seeds = false
@@ -61,9 +61,9 @@ wallet = "~/.config/solana/id.json"
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
 `;
-    // Create Cargo.toml with compatible Anchor ecosystem versions
-    let dependencies = `anchor-lang = "0.30.1"
-anchor-spl = "0.30.1"`;
+    // Create Cargo.toml with matching Anchor CLI version
+    let dependencies = `anchor-lang = "0.32.1"
+anchor-spl = "0.32.1"`;
     // Add CPI-specific dependencies
     if (cpiCode) {
         if (cpiCode.imports.some(imp => imp.includes('mpl_token_metadata'))) {
