@@ -10,13 +10,14 @@ const program = new commander_1.Command();
 program
     .name('forge')
     .description('FORGE - Intent-driven app assembly on Solana')
-    .version('2.0.0');
+    .version('2.1.3');
 program
     .command('init [projectName]')
     .description('Initialize a new FORGE project')
     .option('-i, --intent <intent>', 'Describe what the program should do (enables CPI generation)')
+    .option('-a, --anchor-version <version>', 'Specify Anchor version (default: 0.32.1)', '0.32.1')
     .action(async (projectName, options) => {
-    await (0, init_js_1.initCommand)(projectName, options.intent);
+    await (0, init_js_1.initCommand)(projectName, options.intent, options.anchorVersion);
 });
 program
     .command('deploy')

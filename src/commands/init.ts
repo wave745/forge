@@ -4,7 +4,7 @@ import { join } from 'path';
 import { logo } from '../ascii.js';
 import { detectCPI, generateCPICode } from '../cpi.js';
 
-export async function initCommand(projectName?: string, intent?: string): Promise<void> {
+export async function initCommand(projectName?: string, intent?: string, anchorVersion?: string): Promise<void> {
   console.log(logo);
   console.log('FORGE - Solana Development Platform\n');
 
@@ -30,6 +30,27 @@ export async function initCommand(projectName?: string, intent?: string): Promis
     process.exit(1);
   }
 
+  // Check Rust version for edition 2024 compatibility
+  try {
+    const rustVersionOutput = execSync('rustc --version', { encoding: 'utf-8' });
+    const rustVersionMatch = rustVersionOutput.match(/rustc (\d+)\.(\d+)\.(\d+)/);
+    if (rustVersionMatch) {
+      const major = parseInt(rustVersionMatch[1]);
+      const minor = parseInt(rustVersionMatch[2]);
+      const patch = parseInt(rustVersionMatch[3]);
+
+      // Rust 1.85.0+ required for edition 2024 (stabilized Feb 2025)
+      if (major < 1 || (major === 1 && minor < 85)) {
+        console.warn('⚠️  WARNING: Rust version too old for modern Anchor dependencies');
+        console.warn(`   Current: ${major}.${minor}.${patch}, Required: 1.85.0+ (for edition 2024)`);
+        console.warn('   Update with: rustup update stable');
+        console.warn('   This may cause build failures with "edition2024" errors.\n');
+      }
+    }
+  } catch (error) {
+    console.warn('⚠️  Could not check Rust version. Ensure Rust 1.85.0+ is installed.');
+  }
+
   console.log(`Initializing ${name}...\n`);
 
   // Create project directory
@@ -45,9 +66,12 @@ export async function initCommand(projectName?: string, intent?: string): Promis
   // Generate program ID (simplified for demo)
   const programId = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS";
 
+  // Create Cargo.toml with specified Anchor version
+  const anchorVer = anchorVersion || '0.32.1';
+
   // Create Anchor.toml with matching CLI version
   const anchorToml = `[toolchain]
-anchor_version = "0.32.1"
+anchor_version = "${anchorVer}"
 
 [features]
 seeds = false
@@ -66,10 +90,8 @@ wallet = "~/.config/solana/id.json"
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
 `;
-
-  // Create Cargo.toml with matching Anchor CLI version
-  let dependencies = `anchor-lang = "0.32.1"
-anchor-spl = "0.32.1"`;
+  let dependencies = `anchor-lang = "${anchorVer}"
+anchor-spl = "${anchorVer}"`;
 
   // Add CPI-specific dependencies
   if (cpiCode) {

@@ -23,8 +23,19 @@ export async function statusCommand(): Promise<void> {
 
   // Check Rust
   try {
-    const rustVersion = execSync('rustc --version', { encoding: 'utf8' }).trim().split(' ')[1];
+    const rustVersionOutput = execSync('rustc --version', { encoding: 'utf8' }).trim();
+    const rustVersion = rustVersionOutput.split(' ')[1];
     console.log(`✅ Rust: ${rustVersion}`);
+
+    // Check for edition 2024 compatibility
+    const versionMatch = rustVersionOutput.match(/rustc (\d+)\.(\d+)\.(\d+)/);
+    if (versionMatch) {
+      const major = parseInt(versionMatch[1]);
+      const minor = parseInt(versionMatch[2]);
+      if (major < 1 || (major === 1 && minor < 85)) {
+        console.log('⚠️  WARNING: Rust 1.85.0+ required for edition 2024 (update: rustup update stable)');
+      }
+    }
   } catch (error) {
     console.log('❌ Rust: Not found');
   }
@@ -37,6 +48,39 @@ export async function statusCommand(): Promise<void> {
       const config = readFileSync(anchorToml, 'utf8');
       const network = config.includes('devnet') ? 'devnet' : 'localnet';
       console.log(`📡 Network: ${network}`);
+
+      // Check version compatibility
+      const anchorTomlMatch = config.match(/anchor_version\s*=\s*"([^"]+)"/);
+      if (anchorTomlMatch) {
+        const projectAnchorVersion = anchorTomlMatch[1];
+        console.log(`🔗 Project Anchor version: ${projectAnchorVersion}`);
+
+        // Check if it matches CLI
+        try {
+          const cliVersionOutput = execSync('anchor --version', { encoding: 'utf8' });
+          const cliVersionMatch = cliVersionOutput.match(/anchor-cli (\d+\.\d+\.\d+)/);
+          if (cliVersionMatch && cliVersionMatch[1] !== projectAnchorVersion) {
+            console.log(`⚠️  Version mismatch: CLI ${cliVersionMatch[1]} vs Project ${projectAnchorVersion}`);
+          }
+        } catch (error) {
+          // CLI check already handled above
+        }
+      }
+
+      // Check Cargo.toml versions
+      const cargoToml = join(process.cwd(), 'programs', 'Cargo.toml');
+      if (existsSync(cargoToml)) {
+        try {
+          const cargoContent = readFileSync(cargoToml, 'utf8');
+          const anchorLangMatch = cargoContent.match(/anchor-lang\s*=\s*"([^"]+)"/);
+          if (anchorLangMatch) {
+            console.log(`📦 anchor-lang: ${anchorLangMatch[1]}`);
+          }
+        } catch (error) {
+          // Ignore read errors
+        }
+      }
+
     } catch (error) {
       console.log('📡 Network: Unknown');
     }
