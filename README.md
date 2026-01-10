@@ -1,18 +1,23 @@
 # FORGE SDK
 
-Intent-driven app assembly on Solana.
+![npm](https://img.shields.io/npm/v/forge-sdk-solana)
+![npm](https://img.shields.io/npm/dm/forge-sdk-solana)
+![License](https://img.shields.io/npm/l/forge-sdk-solana)
 
-## Install
+Intent-driven app assembly on Solana. Infrastructure that survives.
+
+## ⚡ Install
 
 ```bash
-npm install -g forge-sdk
+npm install -g forge-sdk-solana
 ```
 
-## Usage
+## 🚀 Usage
 
 ### Initialize a project
 ```bash
 forge init my-project
+cd my-project
 ```
 
 ### Check status
@@ -22,32 +27,37 @@ forge status
 
 ### Deploy to Solana
 ```bash
-cd my-project
 forge deploy
 ```
 
-## Prerequisites
+## 📋 Prerequisites
 
-- Node.js 18+
-- Rust 1.70+
-- Solana CLI
-- Anchor CLI 0.29.0
+- **Node.js** 18+
+- **Rust** 1.70+
+- **Solana CLI** (latest)
+- **Anchor CLI** 0.29.0
 
-## What FORGE Does
+## 🎯 What FORGE Does
 
-FORGE generates Anchor programs from intent. It creates the boilerplate so you can focus on business logic.
+FORGE generates production-ready Anchor programs from intent. It creates the boilerplate so you focus on business logic.
 
-## What FORGE Does NOT Do
+- ✅ Generates complete Anchor workspace
+- ✅ Creates Cargo.toml with proper dependencies
+- ✅ Sets up lib.rs with Anchor framework
+- ✅ Configures Anchor.toml for deployment
+- ✅ Works with real Solana networks
+
+## 🚫 What FORGE Does NOT Do
 
 FORGE does not:
-- host your code
-- manage your keys
-- abstract blockchain risks
-- hold your hand
+- Host your code
+- Manage your keys
+- Abstract blockchain risks
+- Hold your hand
 
 If you want magic, look elsewhere.
 
-## Requirements
+## 📚 Requirements
 
 You must have:
 - Basic Rust knowledge
@@ -55,10 +65,56 @@ You must have:
 - Your own wallet and keys
 - Test SOL for deployment
 
-## Support
+## 🔧 Commands
 
-This is infrastructure. If it breaks, file an issue. If you don't understand Solana, learn Solana first.
+| Command | Description |
+|---------|-------------|
+| `forge init <name>` | Create new Anchor project |
+| `forge status` | Check environment and tools |
+| `forge deploy` | Deploy program to Solana |
 
-## License
+## 📖 Examples
 
-MIT
+```bash
+# Create a token program
+forge init my-token
+
+# Check everything is ready
+forge status
+
+# Deploy to devnet
+forge deploy
+```
+
+## 🏗️ Architecture
+
+```
+FORGE CLI (npm)
+├── forge-sdk-solana - Node.js CLI tool
+└── forge-runtime - Rust runtime (crates.io)
+
+Both work together for complete Solana development
+```
+
+## 🐛 Support
+
+This is infrastructure. If it breaks:
+1. File an issue on GitHub
+2. Include your `forge status` output
+3. Describe what you expected vs what happened
+
+If you don't understand Solana, learn Solana first.
+
+## 📄 License
+
+MIT - [https://github.com/forge-protocol/forge/blob/main/LICENSE](https://github.com/forge-protocol/forge/blob/main/LICENSE)
+
+## 🔗 Links
+
+- **Homepage**: [https://github.com/forge-protocol/forge](https://github.com/forge-protocol/forge)
+- **NPM Package**: [https://www.npmjs.com/package/forge-sdk-solana](https://www.npmjs.com/package/forge-sdk-solana)
+- **Issues**: [https://github.com/forge-protocol/forge/issues](https://github.com/forge-protocol/forge/issues)
+
+---
+
+**FORGE: Infrastructure, not cosplay.** ⚡

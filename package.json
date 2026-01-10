@@ -1,6 +1,6 @@
 {
   "name": "forge-sdk-solana",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "FORGE - Intent-driven app assembly on Solana",
   "main": "dist/index.js",
   "bin": {
@@ -23,7 +23,7 @@
     "forge",
     "sdk"
   ],
-  "author": "FORGE",
+  "author": "FORGE Team <hello@forge-protocol.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
