@@ -1,219 +1,64 @@
-# FORGE - Solana Development Platform
+# FORGE SDK
 
-![FORGE Logo](https://img.shields.io/badge/FORGE-Solana-black?style=for-the-badge&logo=solana)
-![Node.js](https://img.shields.io/badge/Node.js-18+-green?style=flat-square&logo=node.js)
-![Rust](https://img.shields.io/badge/Rust-1.70+-orange?style=flat-square&logo=rust)
-![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue?style=flat-square&logo=typescript)
+Intent-driven app assembly on Solana.
 
-**FORGE is your complete development platform for building, testing, and deploying Solana programs with AI-powered assistance.**
-
-## ✨ Features
-
-- 🚀 **Next.js 15** frontend with modern React patterns
-- 🖥️ **CLI Tool** for project management and deployment
-- 📚 **TypeScript SDK** with Zod validation and utilities
-- 🔧 **Backend API** with x402 payment integration
-- ⚡ **Anchor Programs** with smart contract templates
-- 🎨 **Modern UI** with Tailwind CSS and shadcn/ui
-- 🤖 **AI-Powered** development assistance
-
-## 🛠️ Quick Start
-
-### 1. Automated Setup (Recommended)
+## Install
 
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd forge-protocol
-
-# Run the automated setup (installs all dependencies)
-npm run setup
+npm install -g forge-sdk
 ```
 
-### 2. Manual Setup
+## Usage
 
-If automated setup fails, follow these steps:
-
+### Initialize a project
 ```bash
-# Install system dependencies
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh  # Rust
-sh -c "$(curl -sSfL https://release.solana.com/v1.17.0/install)"  # Solana CLI
-cargo install --git https://github.com/coral-xyz/anchor anchor-cli --tag v0.29.0  # Anchor
-
-# Install Node.js dependencies
-npm install
-
-# Setup environment
-npm run setup
-
-# Verify installation
-npm run health
+forge init my-project
 ```
 
-### 3. Start Development
-
+### Check status
 ```bash
-# Start the website
-npm run dev
-
-# In another terminal, start the backend
-npm run dev:backend
-
-# Build and link CLI
-npm run build:cli
-cd packages/cli && npm link
+forge status
 ```
 
-### 4. Create Your First Project
-
+### Deploy to Solana
 ```bash
-# Create a new Solana program
-forge init my-awesome-program
-
-# Navigate to the project
-cd my-awesome-program
-
-# Build the program
-forge build
-
-# Test the program
-anchor test
+cd my-project
+forge deploy
 ```
 
-## 📋 Prerequisites
+## Prerequisites
 
-### System Requirements
-- **Node.js**: 18.0.0 or higher
-- **Rust**: 1.70.0 or higher
-- **Solana CLI**: Latest stable
-- **Anchor CLI**: 0.29.0
+- Node.js 18+
+- Rust 1.70+
+- Solana CLI
+- Anchor CLI 0.29.0
 
-### Platform Support
-- ✅ **Linux** (Ubuntu 20.04+, Fedora 33+)
-- ✅ **macOS** (10.15+)
-- ✅ **Windows** (WSL2 recommended)
+## What FORGE Does
 
-## 🚀 Available Scripts
+FORGE generates Anchor programs from intent. It creates the boilerplate so you can focus on business logic.
 
-| Command | Description |
-|---------|-------------|
-| `npm run setup` | Automated environment setup |
-| `npm run health` | Check system health |
-| `npm run dev` | Start Next.js development server |
-| `npm run build` | Build Next.js application |
-| `npm run build:all` | Build all packages |
-| `npm run dev:backend` | Start backend API server |
-| `npm run install:all` | Install all dependencies |
+## What FORGE Does NOT Do
 
-## 📁 Project Structure
+FORGE does not:
+- host your code
+- manage your keys
+- abstract blockchain risks
+- hold your hand
 
-```
-forge-protocol/
-├── app/                    # Next.js frontend
-├── packages/
-│   ├── cli/               # CLI tool (@forge/cli)
-│   ├── sdk/               # TypeScript SDK (@forge/sdk)
-│   └── backend/           # API server (@forge/backend)
-├── programs/              # Anchor smart contracts
-├── docs/                  # Documentation
-├── setup.sh              # Automated setup script
-└── health-check.js       # System validation
-```
+If you want magic, look elsewhere.
 
-## 🔧 Development Workflow
+## Requirements
 
-### Creating Programs
-```bash
-# Initialize a new project
-forge init my-program
+You must have:
+- Basic Rust knowledge
+- Understanding of Solana concepts
+- Your own wallet and keys
+- Test SOL for deployment
 
-# Choose template (basic, token, nft, dao)
-forge init my-program --template token
+## Support
 
-# Build the program
-cd my-program && forge build
+This is infrastructure. If it breaks, file an issue. If you don't understand Solana, learn Solana first.
 
-# Test locally
-anchor test
+## License
 
-# Deploy to devnet
-anchor deploy
-```
-
-### Using the SDK
-```typescript
-import { ForgeSDK } from '@forge/sdk';
-
-const sdk = new ForgeSDK({ network: 'devnet' });
-
-// Validate program configuration
-const result = sdk.validateProgram(config);
-```
-
-### Payment Integration
-```typescript
-// Create payment request
-const response = await fetch('/api/payments/create', {
-  method: 'POST',
-  body: JSON.stringify({
-    amount: 1.0,
-    currency: 'SOL',
-    recipient: 'treasury_address'
-  })
-});
-```
-
-## 🔐 Environment Configuration
-
-### Root (.env.local)
-```env
-NEXT_PUBLIC_SOLANA_NETWORK=devnet
-```
-
-### Backend (packages/backend/.env.local)
-```env
-TREASURY_PUBKEY=your_treasury_wallet
-HELIUS_RPC_URL=https://devnet.helius-rpc.com/?api-key=your_key
-PORT=3001
-```
-
-## 🧪 Testing
-
-```bash
-# Test all packages
-npm test
-
-# Test individual packages
-npm run test:cli
-npm run test:sdk
-npm run test:backend
-```
-
-## 📚 Documentation
-
-- [Getting Started Guide](./docs/guides/getting-started.md)
-- [Architecture Overview](./docs/architecture/overview.md)
-- [API Reference](./docs/api/index.md)
-- [CLI Commands](./docs/guides/cli-commands.md)
-- [Troubleshooting](./docs/guides/troubleshooting.md)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Run tests: `npm test`
-4. Submit a pull request
-
-## 📄 License
-
-FORGE is licensed under the MIT License. See [LICENSE](./LICENSE) for details.
-
-## 🆘 Support
-
-- 📖 [Documentation](./docs/)
-- 💬 [Discord Community](https://discord.gg/forge)
-- 🐛 [GitHub Issues](https://github.com/forge-protocol/issues)
-
----
-
-**Built with ❤️ for the Solana ecosystem**
+MIT
