@@ -10,7 +10,7 @@ const program = new commander_1.Command();
 program
     .name('forge')
     .description('FORGE - Intent-driven app assembly on Solana')
-    .version('0.1.0');
+    .version('2.0.0');
 program
     .command('init [projectName]')
     .description('Initialize a new FORGE project')
