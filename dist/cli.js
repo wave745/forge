@@ -9,6 +9,7 @@ const status_js_1 = require("./commands/status.js");
 const generate_sdk_js_1 = require("./commands/generate-sdk.js");
 const audit_js_1 = require("./commands/audit.js");
 const test_js_1 = require("./commands/test.js");
+const verify_js_1 = require("./commands/verify.js");
 const program = new commander_1.Command();
 program
     .name('forge')
@@ -42,6 +43,12 @@ program
     await (0, test_js_1.testCommand)();
 });
 program
+    .command('verify')
+    .description('Verify contract source code on Solana Explorer')
+    .action(async () => {
+    await (0, verify_js_1.verifyCommand)();
+});
+program
     .command('generate-sdk [outputDir]')
     .description('Generate TypeScript SDK from Anchor program')
     .action(async (outputDir) => {
@@ -66,6 +73,7 @@ program.on('--help', () => {
     console.log('  init          Create new Anchor projects');
     console.log('  audit         Run security audit on program');
     console.log('  test          Generate and run comprehensive tests');
+    console.log('  verify        Verify contract on Solana Explorer');
     console.log('  deploy        Deploy to Solana network');
     console.log('  generate-sdk  Generate TypeScript SDK from program');
     console.log('  status        Check environment & versions');

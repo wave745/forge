@@ -101,6 +101,24 @@ forge test
 - ✅ Error condition testing
 - ✅ Access control enforcement
 
+### Contract Verification
+```bash
+forge verify
+```
+
+**Source Code Transparency:**
+- 📤 **Solana Explorer Upload**: Source code and IDL verification
+- 🔍 **Trust Building**: Prove deployed code matches published source
+- 🏷️ **Metadata Publishing**: Program name, version, description, repository
+- 🔗 **Explorer Links**: Direct links to verified contract pages
+
+**Verification Process:**
+- ✅ Build program and generate IDL
+- ✅ Collect all source files and metadata
+- ✅ Prepare verification bundle
+- ✅ Generate Solana Explorer verification links
+- ✅ Save local verification record
+
 ### Update FORGE
 ```bash
 forge update
@@ -128,6 +146,7 @@ FORGE transforms natural language intents into production-ready Solana programs.
 ### Core Features
 - ✅ **Intent-Driven Generation**: `"transfer 100 tokens safely"` → Modern CPI code
 - ✅ **Automated Testing Framework**: Comprehensive test suites with security validation
+- ✅ **Contract Verification**: Source code transparency on Solana Explorer
 - ✅ **Multi-Environment Deployment**: Deploy to devnet/mainnet/localnet with safety checks
 - ✅ **Security Audit Tools**: Automated security analysis and best practices validation
 - ✅ **Complete Anchor Workspace**: Ready-to-build projects with proper structure

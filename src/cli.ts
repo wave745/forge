@@ -8,6 +8,7 @@ import { statusCommand, updateCommand } from './commands/status.js';
 import { generateSdkCommand } from './commands/generate-sdk.js';
 import { auditCommand } from './commands/audit.js';
 import { testCommand } from './commands/test.js';
+import { verifyCommand } from './commands/verify.js';
 
 const program = new Command();
 
@@ -48,6 +49,13 @@ program
   });
 
 program
+  .command('verify')
+  .description('Verify contract source code on Solana Explorer')
+  .action(async () => {
+    await verifyCommand();
+  });
+
+program
   .command('generate-sdk [outputDir]')
   .description('Generate TypeScript SDK from Anchor program')
   .action(async (outputDir) => {
@@ -75,6 +83,7 @@ program.on('--help', () => {
   console.log('  init          Create new Anchor projects');
   console.log('  audit         Run security audit on program');
   console.log('  test          Generate and run comprehensive tests');
+  console.log('  verify        Verify contract on Solana Explorer');
   console.log('  deploy        Deploy to Solana network');
   console.log('  generate-sdk  Generate TypeScript SDK from program');
   console.log('  status        Check environment & versions');
