@@ -7,6 +7,7 @@ import { deployCommand } from './commands/deploy.js';
 import { statusCommand, updateCommand } from './commands/status.js';
 import { generateSdkCommand } from './commands/generate-sdk.js';
 import { auditCommand } from './commands/audit.js';
+import { testCommand } from './commands/test.js';
 
 const program = new Command();
 
@@ -40,6 +41,13 @@ program
   });
 
 program
+  .command('test')
+  .description('Generate and run comprehensive test suite')
+  .action(async () => {
+    await testCommand();
+  });
+
+program
   .command('generate-sdk [outputDir]')
   .description('Generate TypeScript SDK from Anchor program')
   .action(async (outputDir) => {
@@ -66,6 +74,7 @@ program.on('--help', () => {
   console.log('\nCommands:');
   console.log('  init          Create new Anchor projects');
   console.log('  audit         Run security audit on program');
+  console.log('  test          Generate and run comprehensive tests');
   console.log('  deploy        Deploy to Solana network');
   console.log('  generate-sdk  Generate TypeScript SDK from program');
   console.log('  status        Check environment & versions');

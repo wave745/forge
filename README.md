@@ -81,6 +81,26 @@ forge audit
 - 🛡️ **Access Control**: Signer constraints, PDA bumps
 - 📋 **Configuration**: Wallet paths, cluster settings
 
+### Testing Framework
+```bash
+forge test
+```
+
+**Automated Test Generation:**
+- 🧪 **Comprehensive Coverage**: Program initialization, all instructions, edge cases
+- 🔐 **Security Testing**: Access control validation, error condition handling
+- 💰 **Token Operations**: SPL token transfer, mint, burn functionality
+- 🎯 **PDA Validation**: Proper derived address generation and validation
+- ⚡ **Performance Tests**: Gas usage analysis, large data handling
+
+**Generated Test Suite Includes:**
+- ✅ Program initialization and IDL validation
+- ✅ All instruction handlers with sensible defaults
+- ✅ Token program integration tests
+- ✅ PDA derivation correctness
+- ✅ Error condition testing
+- ✅ Access control enforcement
+
 ### Update FORGE
 ```bash
 forge update
@@ -107,6 +127,7 @@ FORGE transforms natural language intents into production-ready Solana programs.
 
 ### Core Features
 - ✅ **Intent-Driven Generation**: `"transfer 100 tokens safely"` → Modern CPI code
+- ✅ **Automated Testing Framework**: Comprehensive test suites with security validation
 - ✅ **Multi-Environment Deployment**: Deploy to devnet/mainnet/localnet with safety checks
 - ✅ **Security Audit Tools**: Automated security analysis and best practices validation
 - ✅ **Complete Anchor Workspace**: Ready-to-build projects with proper structure
