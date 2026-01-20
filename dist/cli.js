@@ -14,7 +14,7 @@ const program = new commander_1.Command();
 program
     .name('forge')
     .description('FORGE - Intent-driven app assembly on Solana')
-    .version('2.2.1');
+    .version('2.2.5');
 program
     .command('init [projectName]')
     .description('Initialize a new FORGE project')
