@@ -4,6 +4,7 @@ import { Command } from 'commander';
 import { logo } from './ascii.js';
 import { initCommand, listTemplatesCommand } from './commands/init.js';
 import { deployCommand } from './commands/deploy.js';
+import { hardenCommand } from './commands/harden.js';
 import { statusCommand, updateCommand } from './commands/status.js';
 import { generateSdkCommand } from './commands/generate-sdk.js';
 import { auditCommand } from './commands/audit.js';
@@ -12,6 +13,7 @@ import { verifyCommand } from './commands/verify.js';
 import { upgradeCommand } from './commands/upgrade.js';
 import { profileCommand } from './commands/profile.js';
 import { monitorCommand } from './commands/monitor.js';
+import { simulateCommand } from './commands/simulate.js';
 import { interactiveCommand } from './commands/interactive.js';
 import { docsCommand } from './commands/docs.js';
 import { migrateCommand } from './commands/migrate.js';
@@ -28,7 +30,7 @@ const program = new Command();
 program
   .name('forge')
   .description('FORGE - Intent-driven app assembly on Solana')
-  .version('3.2.0');
+  .version('3.4.0');
 
 program
   .command('init [projectName]')
@@ -56,14 +58,14 @@ program
   });
 
 program
-  .command('audit')
-  .description('Run security audit on Anchor program')
-  .option('--deep', 'Run deep security analysis with advanced checks')
-  .action(async (options) => {
-    await auditCommand(options.deep);
+  .command('harden')
+  .description('Apply security best-practices and forge-runtime safeguards')
+  .action(async () => {
+    await hardenCommand();
   });
 
 program
+  .command('audit')
   .command('test')
   .description('Generate and run comprehensive test suite')
   .action(async () => {
@@ -89,6 +91,13 @@ program
   .description('Analyze program performance and compute unit usage')
   .action(async () => {
     await profileCommand();
+  });
+
+program
+  .command('simulate [instruction]')
+  .description('Simulate a program instruction to preview logs and CU usage')
+  .action(async (instruction) => {
+    await simulateCommand(instruction);
   });
 
 program
@@ -200,6 +209,8 @@ program.on('--help', () => {
   console.log('\nDevelopment:');
   console.log('  test          Generate and run comprehensive tests');
   console.log('  audit         Run security audit (--deep for advanced)');
+  console.log('  harden        Apply security safeguards to your project');
+  console.log('  simulate      Simulate instructions to preview logs and CUs');
   console.log('  quality       Analyze code quality metrics');
   console.log('  profile       Analyze performance and compute units');
   console.log('  docs          Generate API documentation');

@@ -81,6 +81,17 @@ forge deploy --env localnet
 - ✅ Auto-updates Anchor.toml with environment RPC URLs
 - ✅ Mainnet deployment requires explicit confirmation
 
+### Security Hardening
+```bash
+forge harden
+```
+
+**Safeguards include:**
+- 🛡️ **Macro Integration**: Injects `require_signer!`, `assert_owned_by!`, and `checked_math!`
+- 📋 **Config Hardening**: Enforces strict Anchor linting and PDA safety in `Anchor.toml`
+- 🔒 **Security Modules**: Generates a local `security.rs` for project-specific rules
+- 📦 **Runtime Safety**: Automatically adds `forge-runtime` to program dependencies
+
 ### Security Audit
 ```bash
 forge audit
@@ -168,6 +179,20 @@ forge migrate 0.32.1
 ```bash
 forge profile
 ```
+
+### Instruction Simulation
+```bash
+forge simulate
+
+# Simulate specific instruction
+forge simulate process_intent
+```
+
+**Simulation Insights:**
+- ⚡ **Compute Units**: Exact CU usage for the instruction
+- 📜 **Prettified Logs**: All `msg!` outputs from the program
+- 💎 **Return Values**: Capture instruction return data
+- 🔮 **Dry-run**: Test logic without any SOL cost or deployment
 
 **Performance Insights:**
 - ⚡ Compute unit usage analysis
@@ -330,6 +355,8 @@ FORGE transforms natural language intents into production-ready Solana programs.
 - ✅ **Program Search**: Find verified programs and best practices
 - ✅ **CI/CD Integration**: GitHub Actions workflow generation
 - ✅ **Fair-Launch Support**: Integrated Moonshot & Pump.fun launching
+- ✅ **Security Hardening**: Auto-inject safeguards with `forge harden`
+- ✅ **Instruction Simulator**: Preview logs and CUs with `forge simulate`
 - ✅ **Complete Anchor Workspace**: Ready-to-build projects with proper structure
 - ✅ **Client SDK Generation**: Auto-generated Legacy & **Web3.js v2** SDKs
 - ✅ **Modern CPI Helpers**: `transfer_checked`, `mint_to`, PDA signers with `ctx.bumps`
@@ -473,6 +500,8 @@ You must have:
 | `forge status` | Check environment, versions, and compatibility |
 | `forge update` | Update FORGE to latest version |
 | `forge deploy` | Deploy program to Solana network |
+| `forge harden` | Apply security safeguards to your project |
+| `forge simulate` | Preview logs and CU usage for instructions |
 
 ## 📖 Examples
 
