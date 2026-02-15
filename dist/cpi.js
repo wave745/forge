@@ -59,6 +59,20 @@ function detectCPI(intent) {
             }
         });
     }
+    // Moonshot Launch
+    if (/\b(moonshot|fair.*launch|bond.*curve)\b/.test(lowerIntent)) {
+        detections.push({
+            type: 'moonshot_launch',
+            confidence: 0.95
+        });
+    }
+    // Pump.fun Launch
+    if (/\b(pump|pumpfun|meme.*token)\b/.test(lowerIntent)) {
+        detections.push({
+            type: 'pumpfun_launch',
+            confidence: 0.9
+        });
+    }
     return detections.sort((a, b) => b.confidence - a.confidence);
 }
 /**
