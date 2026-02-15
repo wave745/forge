@@ -146,6 +146,8 @@ forge init my-dao --template dao-governance
 - 💎 **staking-rewards**: Token staking with rewards
 - 🔄 **escrow-swap**: Trustless token swap
 - ⏰ **token-vesting**: Time-based vesting schedules
+- 🚀 **moonshot-fair-launch**: Moonshot-compatible bonding curve
+- 💊 **pumpfun-launch**: Standard Pump.fun meme token
 
 ### Program Upgrade & Migration
 ```bash
@@ -324,6 +326,7 @@ FORGE transforms natural language intents into production-ready Solana programs.
 - ✅ **Network Utilities**: Switch between networks, test connections
 - ✅ **Program Search**: Find verified programs and best practices
 - ✅ **CI/CD Integration**: GitHub Actions workflow generation
+- ✅ **Fair-Launch Support**: Integrated Moonshot & Pump.fun launching
 - ✅ **Complete Anchor Workspace**: Ready-to-build projects with proper structure
 - ✅ **Client SDK Generation**: Auto-generated TypeScript SDK for program interaction
 - ✅ **Modern CPI Helpers**: `transfer_checked`, `mint_to`, PDA signers with `ctx.bumps`

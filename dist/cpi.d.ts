@@ -1,5 +1,5 @@
 export interface CPIDetection {
-    type: 'system_transfer' | 'token_mint' | 'token_transfer' | 'token_burn' | 'create_ata' | 'create_metadata';
+    type: 'system_transfer' | 'token_mint' | 'token_transfer' | 'token_burn' | 'create_ata' | 'create_metadata' | 'moonshot_launch' | 'pumpfun_launch';
     confidence: number;
     params?: Record<string, any>;
 }

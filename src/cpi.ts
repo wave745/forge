@@ -1,5 +1,5 @@
 export interface CPIDetection {
-  type: 'system_transfer' | 'token_mint' | 'token_transfer' | 'token_burn' | 'create_ata' | 'create_metadata';
+  type: 'system_transfer' | 'token_mint' | 'token_transfer' | 'token_burn' | 'create_ata' | 'create_metadata' | 'moonshot_launch' | 'pumpfun_launch';
   confidence: number;
   params?: Record<string, any>;
 }
@@ -76,6 +76,22 @@ export function detectCPI(intent: string): CPIDetection[] {
         symbol: extractMetadataField(lowerIntent, 'symbol'),
         uri: extractMetadataField(lowerIntent, 'uri')
       }
+    });
+  }
+
+  // Moonshot Launch
+  if (/\b(moonshot|fair.*launch|bond.*curve)\b/.test(lowerIntent)) {
+    detections.push({
+      type: 'moonshot_launch',
+      confidence: 0.95
+    });
+  }
+
+  // Pump.fun Launch
+  if (/\b(pump|pumpfun|meme.*token)\b/.test(lowerIntent)) {
+    detections.push({
+      type: 'pumpfun_launch',
+      confidence: 0.9
     });
   }
 

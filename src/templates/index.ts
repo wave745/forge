@@ -60,6 +60,22 @@ export const templates: Template[] = [
     category: 'utility',
     features: ['Create vesting schedule', 'Linear vesting', 'Cliff periods', 'Claim vested tokens'],
     files: []
+  },
+  {
+    id: 'moonshot-fair-launch',
+    name: 'Moonshot Fair Launch',
+    description: 'Fair launch token compatible with Moonshot bonding curve',
+    category: 'token',
+    features: ['Custom fees', 'Launch restrictions', 'Moonshot integration', 'Metadata prep'],
+    files: []
+  },
+  {
+    id: 'pumpfun-launch',
+    name: 'Pump.fun Token',
+    description: 'Standard token designed for Pump.fun fair launching',
+    category: 'token',
+    features: ['Curve compatibility', 'Developer allocation', 'Metadata standard', 'Initial liquidity'],
+    files: []
   }
 ];
 
