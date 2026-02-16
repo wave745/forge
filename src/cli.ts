@@ -24,6 +24,7 @@ import { networkCommand } from './commands/network.js';
 import { searchCommand } from './commands/search.js';
 import { analyticsCommand } from './commands/analytics.js';
 import { ciCommand } from './commands/ci.js';
+import { agentCommand } from './commands/agent.js';
 
 const program = new Command();
 
@@ -190,6 +191,14 @@ program
   .description('Check FORGE status and environment')
   .action(async () => {
     await statusCommand();
+  });
+
+program
+  .command('agent [action]')
+  .description('Manage agentic capabilities (analyze, manifest, harden)')
+  .option('-o, --output <path>', 'Output path for manifest', 'agent-manifest.json')
+  .action(async (action, options) => {
+    await agentCommand(action, options);
   });
 
 program
